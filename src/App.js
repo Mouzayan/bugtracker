@@ -2,6 +2,7 @@ import React from 'react';
 import store from './app/store';
 import { bugAdded } from './app/actions';
 import { bugRemoved } from './app/actions';
+import { bugResolved } from './app/actions';
 
 function App() {
   return (
@@ -12,15 +13,16 @@ function App() {
 }
 
 const unsubscribe = store.subscribe(() => {
-  console.log('store changed!', store.getState());
+  console.log('Store Changed!', store.getState());
 })
 
 store.dispatch((bugAdded('Bug 1')))
+store.dispatch((bugAdded('Bug 2')))
 
-unsubscribe();
+//unsubscribe();
 
-store.dispatch((bugRemoved('Bug 1')))
-
+store.dispatch((bugResolved(1)))
+store.dispatch((bugRemoved(2)))
 
 console.log(store.getState());
 
