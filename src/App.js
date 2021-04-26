@@ -1,5 +1,7 @@
 import React from 'react';
 import store from './app/store';
+import { bugAdded } from './app/actions';
+import { bugRemoved } from './app/actions';
 
 function App() {
   return (
@@ -13,21 +15,12 @@ const unsubscribe = store.subscribe(() => {
   console.log('store changed!', store.getState());
 })
 
-store.dispatch({
-  type: "bugAdded",
-  payload: {
-    description: "Bug1"
-  }
-})
+store.dispatch((bugAdded('Bug 1')))
 
 unsubscribe();
 
-store.dispatch({
-  type: "bugRemoved",
-  payload: {
-    id : 1,
-  }
-})
+store.dispatch((bugRemoved('Bug 1')))
+
 
 console.log(store.getState());
 
